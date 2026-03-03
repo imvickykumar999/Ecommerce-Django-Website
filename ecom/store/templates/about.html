@@ -1,45 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- 
-  This wrapper ensures the content area takes up enough height 
-  to push the footer to the bottom of the screen.
--->
-<div style="min-height: 80vh; display: flex; flex-direction: column;">
 
-    <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">About Us</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Welcome to Ecommerce</p>
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">About Us</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Welcome to Ecommerce</p>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content Area -->
+<!-- flex-grow-1 ensures this section expands to fill the empty space -->
+<section class="py-5 flex-grow-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <p class="fs-5 text-secondary mb-4" style="text-align: justify;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                
+                <p class="fs-5 text-secondary" style="text-align: justify;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
             </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <!-- Main Content Area -->
-    <!-- flex-grow-1 ensures this section expands to fill the empty space -->
-    <section class="py-5 flex-grow-1">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <p class="fs-5 text-secondary mb-4" style="text-align: justify;">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    
-                    <p class="fs-5 text-secondary" style="text-align: justify;">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</div>
 {% endblock %}

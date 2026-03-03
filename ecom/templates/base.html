@@ -28,8 +28,10 @@
             {% endfor %}
         {% endif %}
 
-        {% block content %}
-        {% endblock %}
+        <div style="min-height: 80vh; display: flex; flex-direction: column;">
+            {% block content %}
+            {% endblock %}
+        </div>
 
         <!-- Footer-->
         <footer class="py-5 bg-dark">
