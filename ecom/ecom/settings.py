@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'ecommerce-django-website.onrender.com',
+    'shop.imvickykumar999.dpdns.org',
     '.onrender.com',
     'localhost',
     '127.0.0.1',
