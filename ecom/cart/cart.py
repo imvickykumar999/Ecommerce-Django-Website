@@ -11,9 +11,9 @@ class Cart:
 
         self.cart = cart
 
-    def add(self, product, product_qty):
+    def add(self, product, quantity):
         product_id = str(product.id)
-        product_qty = int(product_qty)
+        product_qty = int(quantity)
 
         if product_id in self.cart:
             pass
@@ -33,3 +33,12 @@ class Cart:
     def get_quants(self):
         quantities = self.cart
         return quantities
+
+    def update(self, product, quantity):
+        product_id = str(product)
+        product_qty = int(quantity)
+
+        if product_id in self.cart:
+            self.cart[product_id]['qty'] = product_qty
+
+        self.session.modified = True

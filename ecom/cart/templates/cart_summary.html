@@ -15,18 +15,24 @@
 <br/>
 <div class="container">
     <center>
+        <br/>
+
         {% if cart_products %}
             {% for product in cart_products %}
                 
-                <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3" style="max-width: 80%;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+                            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="..." style="height: 100%; width: 100%;">
                         </div>
 
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">{{ product.name }}</h5>
+                                
+                                <h4 class="card-title">
+                                    <a href="{% url 'product' product.id %}" class="text-decoration-none">{{ product.name }}</a>
+                                </h4>
+
                                 <p class="card-text">
                                     <strong>Price: </strong>
                                     ${{ product.price_or_sale }}
@@ -37,7 +43,7 @@
                                         <strong>Quantity:</strong>
                                     </div>
                                     <div class="col-md-3">
-                                        <select class="form-select form-select-sm" id="qty-cart">
+                                        <select class="form-select form-select-sm" id="select{{ product.id }}">
                                             {% for key, value in quantities.items %}
                                                 {% if key == product.id|slugify %}
                                                     <option selected value="{{ value.qty }}">{{ value.qty }}</option>
@@ -53,6 +59,9 @@
                                     </div>
                                 </div>
 
+                                <br/>
+                                <button type="button" data-index="{{ product.id }}" class="btn btn-sm btn-outline-secondary update-cart">Update</button>
+                                <button type="button" data-index="{{ product.id }}" class="btn btn-sm btn-outline-danger remove-from-cart">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -62,7 +71,38 @@
         {% else %}
             <h3>Your cart is empty.</h3>
         {% endif %}
+
+        <br/>
     </center>
 </div>
+
+<script>
+    $(document).on('click', '.update-cart', function(e) {
+        e.preventDefault();
+
+        var productid = $(this).data('index');
+        var product_qty = $('#select' + productid + ' option:selected').text();
+        console.log(productid, product_qty);
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'cart_update' %}",
+            data: {
+                product_id: productid,
+                product_qty: product_qty,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+
+            success: function(response) {
+                location.reload();
+            },
+
+            error: function(xhr, errmsg, err) {
+                console.log(xhr.status + ": " + xhr.responseText);
+            }
+        });
+    });
+</script>
 
 {% endblock %}
