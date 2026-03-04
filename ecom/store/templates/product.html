@@ -40,10 +40,29 @@
                                 <center>
                                     <p class="card-text justify-content-center">{{ product.description }}</p>
                                     <p class="card-text">
+                                        <strong>Price: </strong> &nbsp;
                                         <strike class="text-danger">${{ product.price }}</strike>
                                         &nbsp;
                                         <span class="text-success">${{ product.sale_price }}</span>
                                     </p>
+
+                                    <br/>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-2">
+                                            <strong>Quantity:</strong>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="form-select form-select-sm" id="qty-cart">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br/>
+
                                     <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Add to Cart</button>
                                 </center>
                             </div>
@@ -64,8 +83,27 @@
                                 <center>
                                     <p class="card-text justify-content-center">{{ product.description }}</p>
                                     <p class="card-text">
+                                        <strong>Price: </strong> &nbsp;
                                         <span class="text-primary">${{ product.price }}</span>
                                     </p>
+
+                                    <br/>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-2">
+                                            <strong>Quantity:</strong>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="form-select form-select-sm" id="qty-cart">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br/>
+
                                     <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Add to Cart</button>
                                 </center>
                             </div>
@@ -89,12 +127,14 @@
             url: "{% url 'cart_add' %}",
             data: {
                 'product_id': $('#add-cart').val(),
+                'product_qty': $('#qty-cart option:selected').text(),
                 'csrfmiddlewaretoken': '{{ csrf_token }}',
                 'action': 'post'
             },
 
             success: function(json) {
                 document.getElementById('cart_quantity').textContent = json.qty;
+                alert('Product added to cart successfully!');
             },
 
             error: function(xhr, errmsg, err) {

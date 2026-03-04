@@ -4,24 +4,21 @@ from store.models import Product
 class Cart:
     def __init__(self, request):
         self.session = request.session
-
-        # get session key if exists
         cart = self.session.get('session_key')
 
-        # if there is no session key, create an empty cart and save it in the session
-        if 'session_key' not in request.session:
+        if not cart:
             cart = self.session['session_key'] = {}
 
-        # to make sure the cart is always available in the session of all pages
         self.cart = cart
 
-    def add(self, product):
+    def add(self, product, product_qty):
         product_id = str(product.id)
+        product_qty = int(product_qty)
 
         if product_id in self.cart:
             pass
         else:
-            self.cart[product_id] = {'price': str(product.price_or_sale())}
+            self.cart[product_id] = {'qty': product_qty}
 
         self.session.modified = True
 
@@ -32,3 +29,7 @@ class Cart:
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
         return products
+
+    def get_quants(self):
+        quantities = self.cart
+        return quantities

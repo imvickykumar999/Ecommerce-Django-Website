@@ -27,7 +27,32 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{ product.name }}</h5>
-                                <p class="card-text">Price: ${{ product.price_or_sale }}</p>
+                                <p class="card-text">
+                                    <strong>Price: </strong>
+                                    ${{ product.price_or_sale }}
+                                </p>
+
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-auto">
+                                        <strong>Quantity:</strong>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select form-select-sm" id="qty-cart">
+                                            {% for key, value in quantities.items %}
+                                                {% if key == product.id|slugify %}
+                                                    <option selected value="{{ value.qty }}">{{ value.qty }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
