@@ -31,9 +31,9 @@
 
                 {% if product.is_sale %}
 
-                    <div class="card mb-3">
+                    <div class="product-detail-card card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 product-image-container">
                                 <!-- Sale badge on image only -->
                                 <div class="position-relative">
                                     <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
@@ -51,19 +51,15 @@
                                             <span class="text-success">${{ product.sale_price }}</span>
                                         </p>
 
-                                        <div class="row justify-content-center align-items-center">
-                                            <div class="col-auto">
-                                                <strong>Quantity:</strong>
-                                            </div>
-                                            <div class="col-auto">
-                                                <select class="form-select form-select-sm" id="qty-cart" style="width: auto;">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </div>
+                                        <div class="quantity-selector justify-content-center">
+                                            <label><strong>Quantity:</strong></label>
+                                            <select class="form-select form-select-sm" id="qty-cart" style="width: auto;">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
                                         </div>
 
                                         <br/>
@@ -76,9 +72,9 @@
 
                 {% else %}
 
-                    <div class="card mb-3">
+                    <div class="product-detail-card card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4">
+                            <div class="col-md-4 product-image-container">
                                 <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
                             </div>
                             
@@ -90,19 +86,15 @@
                                             <span class="text-primary">${{ product.price }}</span>
                                         </p>
 
-                                        <div class="row justify-content-center align-items-center">
-                                            <div class="col-auto">
-                                                <strong>Quantity:</strong>
-                                            </div>
-                                            <div class="col-auto">
-                                                <select class="form-select form-select-sm" id="qty-cart" style="width: auto;">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </div>
+                                        <div class="quantity-selector justify-content-center">
+                                            <label><strong>Quantity:</strong></label>
+                                            <select class="form-select form-select-sm" id="qty-cart" style="width: auto;">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
                                         </div>
 
                                         <br/>

@@ -20,9 +20,9 @@
         {% if cart_products %}
         {% for product in cart_products %}
 
-        <div class="card mb-3" style="max-width: 80%;">
+        <div class="cart-item-card card mb-3" style="max-width: 80%;">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-4 product-image-container">
                     <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
                 </div>
 
@@ -39,21 +39,17 @@
                             ${{ product.price_or_sale }} x {{ product.qty }} = <strong style="color: green;">${{ product.subtotal }}</strong>
                         </p>
 
-                        <div class="row justify-content-center align-items-center">
-                            <div class="col-auto">
-                                <strong>Quantity:</strong>
-                            </div>
-                            <div class="col-auto">
-                                <select class="form-select form-select-sm" id="select{{ product.id }}"
-                                    style="width: auto;">
-                                    <option selected value="{{ product.qty }}">{{ product.qty }}</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
+                        <div class="quantity-selector">
+                            <label for="select{{ product.id }}"><strong>Quantity:</strong></label>
+                            <select class="form-select form-select-sm" id="select{{ product.id }}"
+                                style="width: auto;">
+                                <option selected value="{{ product.qty }}">{{ product.qty }}</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
 
                         <br />
@@ -69,14 +65,17 @@
         {% endfor %}
 
         <!-- Total -->
-        <div class="card mb-3" style="max-width: 80%;">
+        <div class="cart-total-card card mb-3" style="max-width: 80%;">
             <div class="card-body">
                 <h4 class="card-title">Total: &nbsp; <span id="cart-total" style="color: green;">${{ totals }}</span>
                 </h4>
             </div>
         </div>
         {% else %}
-        <h3>Your cart is empty.</h3>
+        <div class="empty-cart">
+            <h3>Your cart is empty.</h3>
+            <p>Add some products to get started!</p>
+        </div>
         {% endif %}
 
         <br />
