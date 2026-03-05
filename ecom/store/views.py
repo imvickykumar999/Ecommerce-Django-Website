@@ -66,3 +66,6 @@ def category(request, category_name):
         return redirect('home')
 
     return render(request, 'category.html', {'products': products, 'category_name': category.name})
+
+def category_summary(request):
+    return render(request, 'category_summary.html', {})

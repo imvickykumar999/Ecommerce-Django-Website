@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Category Summary</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Choose your category</p>
+        </div>
+    </div>
+</header>
+
+<!-- Category Summary -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-3">
+            {% for category in categories %}
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h4 class="card-title mb-3">
+                            <a href="{% url 'category' category.slug %}" class="text-decoration-none">{{ category.name }}</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
