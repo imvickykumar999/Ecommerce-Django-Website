@@ -16,7 +16,7 @@ class Cart:
         product_qty = int(quantity)
 
         if product_id in self.cart:
-            pass
+            self.cart[product_id]['qty'] = product_qty
         else:
             self.cart[product_id] = {'qty': product_qty}
 
@@ -40,5 +40,13 @@ class Cart:
 
         if product_id in self.cart:
             self.cart[product_id]['qty'] = product_qty
+
+        self.session.modified = True
+
+    def delete(self, product):
+        product_id = str(product)
+
+        if product_id in self.cart:
+            del self.cart[product_id]
 
         self.session.modified = True
