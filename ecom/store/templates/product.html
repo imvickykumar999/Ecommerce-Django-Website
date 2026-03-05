@@ -25,7 +25,7 @@
 <!-- Main Content Area -->
 <!-- flex-grow-1 ensures this section expands to fill the empty space -->
 <section class="py-5 flex-grow-1">
-    <div class="container" style="max-width: 100%;">
+    <div class="container" style="max-width: 80%;">
         <div class="row justify-content-center">
             <div class="col-lg-10">
 
@@ -44,7 +44,6 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <center>
-                                        <p class="card-text justify-content-center">{{ product.description }}</p>
                                         <p class="card-text">
                                             <strong>Price: </strong> &nbsp;
                                             <strike class="text-danger">${{ product.price }}</strike>
@@ -66,8 +65,8 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <br/>
-                                        
+
+                                        <br/><br/>
                                         <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Add to Cart</button>
                                     </center>
                                 </div>
@@ -86,7 +85,6 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <center>
-                                        <p class="card-text justify-content-center">{{ product.description }}</p>
                                         <p class="card-text">
                                             <strong>Price: </strong> &nbsp;
                                             <span class="text-primary">${{ product.price }}</span>
@@ -106,8 +104,8 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <br/>
 
+                                        <br/><br/>
                                         <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Add to Cart</button>
                                     </center>
                                 </div>
@@ -117,6 +115,8 @@
 
                 {% endif %}
 
+                <br/>
+                <p class="card-text justify-content-center">{{ product.description | linebreaks }}</p>
             </div>
         </div>
     </div>
