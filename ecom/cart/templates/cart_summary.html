@@ -12,78 +12,87 @@
     </div>
 </header>
 
-<br/>
+<br />
 <div class="container">
     <center>
-        <br/>
+        <br />
 
         {% if cart_products %}
-            {% for product in cart_products %}
-                
-                <div class="card mb-3" style="max-width: 80%;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
-                        </div>
+        {% for product in cart_products %}
 
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                
-                                <h4 class="card-title">
-                                    <a href="{% url 'product' product.id %}" class="text-decoration-none">{{ product.name }}</a>
-                                </h4>
-
-                                <p class="card-text">
-                                    <strong>Price: </strong>
-                                    ${{ product.price_or_sale }}
-                                </p>
-
-                                <div class="row justify-content-center align-items-center">
-                                    <div class="col-auto">
-                                        <strong>Quantity:</strong>
-                                    </div>
-                                    <div class="col-auto">
-                                        <select class="form-select form-select-sm" id="select{{ product.id }}" style="width: auto;">
-                                            {% for key, value in quantities.items %}
-                                                {% if key == product.id|slugify %}
-                                                    <option selected value="{{ value.qty }}">{{ value.qty }}</option>
-                                                {% endif %}
-                                            {% endfor %}
-
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <button type="button" data-index="{{ product.id }}" class="btn btn-sm btn-outline-secondary update-cart">Update</button>
-                                <button type="button" data-index="{{ product.id }}" class="btn btn-sm btn-outline-danger delete-product">Remove</button>
-                            </div>
-                        </div>
-                    </div>
+        <div class="card mb-3" style="max-width: 80%;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
                 </div>
 
-            {% endfor %}
+                <div class="col-md-8">
+                    <div class="card-body">
+
+                        <h4 class="card-title">
+                            <a href="{% url 'product' product.id %}" class="text-decoration-none">{{ product.name }}</a>
+                        </h4>
+
+                        <p class="card-text">
+                            <strong>Price: </strong>
+                            ${{ product.price_or_sale }}
+                        </p>
+
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-auto">
+                                <strong>Quantity:</strong>
+                            </div>
+                            <div class="col-auto">
+                                <select class="form-select form-select-sm" id="select{{ product.id }}"
+                                    style="width: auto;">
+                                    {% for key, value in quantities.items %}
+                                    {% if key == product.id|slugify %}
+                                    <option selected value="{{ value.qty }}">{{ value.qty }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br />
+                        <button type="button" data-index="{{ product.id }}"
+                            class="btn btn-sm btn-outline-secondary update-cart">Update</button>
+                        <button type="button" data-index="{{ product.id }}"
+                            class="btn btn-sm btn-outline-danger delete-product">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        <!-- Total -->
+        <div class="card mb-3" style="max-width: 80%;">
+            <div class="card-body">
+                <h4 class="card-title">Total: &nbsp; <span id="cart-total" style="color: green;">${{ totals }}</span></h4>
+            </div>
+        </div>
         {% else %}
-            <h3>Your cart is empty.</h3>
+        <h3>Your cart is empty.</h3>
         {% endif %}
 
-        <br/>
+        <br />
     </center>
 </div>
 
 <script>
     // Update Cart
-    $(document).on('click', '.update-cart', function(e) {
+    $(document).on('click', '.update-cart', function (e) {
         e.preventDefault();
 
         var productid = $(this).data('index');
         var product_qty = $('#select' + productid + ' option:selected').text();
-        console.log(productid, product_qty);
 
         $.ajax({
             type: 'POST',
@@ -95,18 +104,18 @@
                 action: 'post'
             },
 
-            success: function(response) {
+            success: function (response) {
                 location.reload();
             },
 
-            error: function(xhr, errmsg, err) {
+            error: function (xhr, errmsg, err) {
                 console.log(xhr.status + ": " + xhr.responseText);
             }
         });
     });
 
     // Delete Cart
-    $(document).on('click', '.delete-product', function(e) {
+    $(document).on('click', '.delete-product', function (e) {
         e.preventDefault();
         var productid = $(this).data('index');
 
@@ -119,11 +128,11 @@
                 action: 'post'
             },
 
-            success: function(response) {
+            success: function (response) {
                 location.reload();
             },
 
-            error: function(xhr, errmsg, err) {
+            error: function (xhr, errmsg, err) {
                 console.log(xhr.status + ": " + xhr.responseText);
             }
         });

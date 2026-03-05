@@ -50,3 +50,12 @@ class Cart:
             del self.cart[product_id]
 
         self.session.modified = True
+
+    def cart_total(self):
+        quantities = self.get_quants()
+        products = self.get_prods()
+        total = 0
+        for product in products:
+            total += product.price_or_sale() * quantities[str(product.id)]['qty']
+        return total
+    
