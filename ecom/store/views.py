@@ -11,6 +11,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html', {})
 
+def policy(request):
+    return render(request, 'policy.html', {})
+
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -69,3 +72,50 @@ def category(request, category_name):
 
 def category_summary(request):
     return render(request, 'category_summary.html', {})
+
+def update_user(request):
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            messages.error(request, "You must be logged in to update your profile.")
+            return redirect('login')
+
+        user = request.user
+        new_username = request.POST.get('username', '')
+        new_email = request.POST.get('email', '')
+        new_first_name = request.POST.get('first_name', '')
+        new_last_name = request.POST.get('last_name', '')
+        new_password = request.POST.get('password', '')
+        confirm_password = request.POST.get('password_confirm', '')
+
+        if new_password and new_password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+            return redirect('update_user')
+
+        if new_username and new_username != user.username:
+            if User.objects.filter(username=new_username).exists():
+                messages.error(request, "Username already exists.")
+                return redirect('update_user')
+            user.username = new_username
+
+        if new_email:
+            user.email = new_email
+
+        if new_first_name:
+            user.first_name = new_first_name
+
+        if new_last_name:
+            user.last_name = new_last_name
+
+        if new_password:
+            user.set_password(new_password)
+
+        user.save()
+        messages.success(request, "Profile updated successfully.")
+
+        # Re-authenticate the user if password was changed
+        if new_password:
+            login(request, user)
+
+        return redirect('home')
+    else:
+        return render(request, 'update_user.html', {})
