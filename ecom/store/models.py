@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from django.urls import reverse
 import datetime
@@ -32,7 +33,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-    description = models.TextField(default='', blank=True)
+    description = RichTextField(default='', blank=True)
     image = models.ImageField(upload_to='uploads/products/')
     is_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
@@ -59,4 +60,3 @@ class Order(models.Model):
 
     def __str__(self):
         return self.product
-

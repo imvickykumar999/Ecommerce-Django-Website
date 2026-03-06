@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     'whitenoise.runserver_nostatic', # Add this for better local dev testing
     'django.contrib.staticfiles',
+    'ckeditor',
     'store',
     'cart',
 ]
