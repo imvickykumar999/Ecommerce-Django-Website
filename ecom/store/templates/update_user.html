@@ -14,7 +14,7 @@
 
 <!-- Main Content Area -->
 <section class="py-5">
-    <div class="container" style="max-width: 50%;">
+    <div class="container" style="max-width: 75%;">
         <div class="row justify-content-center">
             <div class="col-lg-8">
 
@@ -24,19 +24,23 @@
                             {% csrf_token %}
                             <div class="mb-3">
                                 <label for="id_username" class="form-label">Username</label>
-                                <input type="text" name="username" value="{{ user.username }}" class="form-control" id="id_username" required>
+                                <input type="text" name="username" value="{{ user.username }}" class="form-control"
+                                    id="id_username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="id_email" class="form-label">Email</label>
-                                <input type="email" name="email" value="{{ user.email }}" class="form-control" id="id_email" required>
+                                <input type="email" name="email" value="{{ user.email }}" class="form-control"
+                                    id="id_email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="id_first_name" class="form-label">First Name</label>
-                                <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control" id="id_first_name">
+                                <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control"
+                                    id="id_first_name">
                             </div>
                             <div class="mb-3">
                                 <label for="id_last_name" class="form-label">Last Name</label>
-                                <input type="text" name="last_name" value="{{ user.last_name }}" class="form-control" id="id_last_name">
+                                <input type="text" name="last_name" value="{{ user.last_name }}" class="form-control"
+                                    id="id_last_name">
                             </div>
                             <div class="mb-3">
                                 <label for="id_password" class="form-label">New Password</label>
@@ -45,7 +49,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="id_password_confirm" class="form-label">Confirm New Password</label>
-                                <input type="password" name="password_confirm" class="form-control" id="id_password_confirm">
+                                <input type="password" name="password_confirm" class="form-control"
+                                    id="id_password_confirm">
                             </div>
                             <button type="submit" class="btn btn-primary">Update Profile</button>
                         </form>
