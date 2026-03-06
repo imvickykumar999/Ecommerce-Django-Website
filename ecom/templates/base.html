@@ -31,16 +31,49 @@
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-            background: #f8f9fa;
-            color: #333;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: rgba(255, 255, 255, 0.9);
             transition: all 0.3s;
             height: 100vh;
             position: sticky;
             top: 0;
-            border-right: 1px solid #dee2e6;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
             display: flex;
             flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #sidebar a {
+            color: rgba(255, 255, 255, 0.7) !important;
+            transition: all 0.2s ease-in-out;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: block;
+        }
+
+        #sidebar a:hover {
+            color: #fff !important;
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 20px;
+        }
+
+        #sidebar h5 a {
+            color: #fff !important;
+            padding: 0;
+        }
+
+        #sidebar h5 a:hover {
+            background: transparent;
+            padding-left: 0;
+        }
+
+        #sidebar .text-muted {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        #sidebar hr {
+            border-top-color: rgba(255, 255, 255, 0.1);
         }
 
         #content {

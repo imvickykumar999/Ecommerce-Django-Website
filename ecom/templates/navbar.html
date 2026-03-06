@@ -1,23 +1,23 @@
 <div class="p-4 pt-5 d-flex flex-column h-100">
-    <h5><a href="{% url 'home' %}" class="text-dark text-decoration-none">24x7 Stream</a></h5>
+    <h5><a href="{% url 'home' %}" class="text-decoration-none">24x7 Stream</a></h5>
 
     <ul class="list-unstyled components mb-4 mt-4">
         <li class="mb-3">
-            <a href="{% url 'home' %}" class="text-dark text-decoration-none d-flex align-items-center">
+            <a href="{% url 'home' %}" class="text-decoration-none d-flex align-items-center">
                 <i class="bi bi-house-door me-2"></i> Home
             </a>
         </li>
         {% if user.is_authenticated %}
         <li class="mb-3">
-            <a href="{% url 'update_user' %}" class="text-dark text-decoration-none d-flex align-items-center">
+            <a href="{% url 'update_user' %}" class="text-decoration-none d-flex align-items-center">
                 <i class="bi bi-person me-2"></i> Profile
             </a>
         </li>
         {% endif %}
         <li class="mb-3">
-            <a href="{% url 'cart_summary' %}" class="text-dark text-decoration-none d-flex align-items-center">
+            <a href="{% url 'cart_summary' %}" class="text-decoration-none d-flex align-items-center">
                 <i class="bi bi-cart3 me-2"></i> Cart
-                <span class="badge bg-dark text-white ms-auto rounded-pill" id="cart_quantity">
+                <span class="badge bg-light text-dark ms-auto rounded-pill" id="cart_quantity">
                     {{ cart|length }}
                 </span>
             </a>
@@ -27,13 +27,13 @@
             <h6 class="text-muted text-uppercase small font-weight-bold">Categories</h6>
         </li>
         <li class="mb-2">
-            <a href="{% url 'category_summary' %}" class="text-dark text-decoration-none small">All Products</a>
+            <a href="{% url 'category_summary' %}" class="text-decoration-none small">All Products</a>
         </li>
         <hr />
 
         {% for category in categories %}
         <li class="mb-2">
-            <a href="{% url 'category' category.slug %}" class="text-dark text-decoration-none small">
+            <a href="{% url 'category' category.slug %}" class="text-decoration-none small">
                 {{ category.name }}
             </a>
         </li>
