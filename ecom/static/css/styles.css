@@ -12716,27 +12716,27 @@ section.py-5 {
   animation: fadeInUp 0.6s ease-out;
 }
 
-.category-card:nth-child(1) {
+.category-grid>div:nth-child(1) .category-card {
   animation-delay: 0.1s;
 }
 
-.category-card:nth-child(2) {
+.category-grid>div:nth-child(2) .category-card {
   animation-delay: 0.2s;
 }
 
-.category-card:nth-child(3) {
+.category-grid>div:nth-child(3) .category-card {
   animation-delay: 0.3s;
 }
 
-.category-card:nth-child(4) {
+.category-grid>div:nth-child(4) .category-card {
   animation-delay: 0.4s;
 }
 
-.category-card:nth-child(5) {
+.category-grid>div:nth-child(5) .category-card {
   animation-delay: 0.5s;
 }
 
-.category-card:nth-child(6) {
+.category-grid>div:nth-child(6) .category-card {
   animation-delay: 0.6s;
 }
 
@@ -13294,4 +13294,48 @@ html {
 
 .table tbody tr:hover {
   background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Plan Card Styling */
+.plan-card {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 20px;
+  overflow: visible !important;
+  background: #fff;
+}
+
+.plan-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+.featured-plan {
+  border: 2px solid #0d6efd !important;
+  box-shadow: 0 10px 25px rgba(13, 110, 253, 0.1) !important;
+}
+
+.plan-icon {
+  background: rgba(13, 110, 253, 0.05);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.plan-card:hover .plan-icon {
+  background: rgba(13, 110, 253, 0.1);
+  transform: rotate(10deg);
+}
+
+.plan-card hr {
+  opacity: 0.1;
+  margin: 1.5rem 0;
+}
+
+.plan-card ul li i {
+  font-size: 1.1rem;
 }
