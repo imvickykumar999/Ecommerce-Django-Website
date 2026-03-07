@@ -256,13 +256,12 @@
         <!-- Tooltip -->
         <div
             class="absolute bottom-full right-0 mb-3 px-3 py-1 bg-transparent text-white text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
-            Read 24x7 Stream Blog
+            Order Now
             <div class="absolute top-full right-4 border-4 border-transparent border-t-transparent"></div>
         </div>
         <!-- FAB Button -->
-        <a href="https://blogforge.imvickykumar999.dpdns.org/?slug=stream-24x7-on-youtube-without-keeping-your-pc-on"
-            target="_blank"
-            class="blog-fab-pulse w-14 h-14 bg-transparent hover:bg-transparent text-white rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-90 border-2 border-white/20 overflow-hidden">
+        <a href="{% url 'home' %}" target="_blank"
+            class="blog-fab-pulse w-16 h-16 md:w-20 md:h-20 bg-transparent hover:bg-transparent text-white rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-90 border-2 border-white/20 overflow-hidden">
             <img src="{% static 'assets/favicon.ico' %}" alt="Blog Avatar" class="w-full h-full object-cover">
         </a>
     </div>
