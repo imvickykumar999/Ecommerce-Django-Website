@@ -116,3 +116,6 @@ def update_user(request):
         return redirect('home')
     else:
         return render(request, 'update_user.html', {})
+
+def index(request):
+    return render(request, 'index.html', {})

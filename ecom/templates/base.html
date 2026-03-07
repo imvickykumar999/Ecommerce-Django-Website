@@ -13,6 +13,8 @@
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"
@@ -98,6 +100,33 @@
                 width: 100%;
             }
         }
+
+        /* Branding Styles */
+        .logo-box {
+            width: 36px;
+            height: 26px;
+            background-color: #ef4444;
+            /* red-500 */
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: #0f172a;
+            /* slate-900 */
+        }
+
+        .logo-text-accent {
+            color: #4f46e5;
+            /* indigo-600 */
+        }
     </style>
 </head>
 
@@ -112,12 +141,17 @@
         <div id="content">
             <!-- Mobile Toggle Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light d-lg-none border-bottom sticky-top"
-                style="z-index: 1020;height: 70px;">
+                style="z-index: 1020;height: 80px;">
                 <div class="container-fluid text-center">
                     <button type="button" id="sidebarCollapse" class="btn btn-dark">
                         <i class="bi bi-list"></i>
                     </button>
-                    <a class="navbar-brand ms-2" href="{% url 'home' %}">24x7 Stream</a>
+                    <a class="navbar-brand ms-2 d-flex align-items-center gap-2" href="{% url 'home' %}">
+                        <div class="logo-box">
+                            <i class="fas fa-play text-white" style="font-size: 10px;"></i>
+                        </div>
+                        <span class="logo-text"><span class="logo-text-accent">24x7 Stream</span></span>
+                    </a>
                 </div>
             </nav>
 
@@ -155,7 +189,7 @@
                                 <div>
                                     <a href="https://play.google.com/store/apps/details?id=com.imvickykumar999.x24live"
                                         target="_blank" class="play-store-link">
-                                        <img src="{% static 'assets/Google_Play_714a8811e2.svg' %}"
+                                        <img src="{% static 'assets/Google_Play_Store_Badge.svg' %}"
                                             alt="Download on Google Play" class="play-store-badge">
                                     </a>
                                 </div>
@@ -203,8 +237,7 @@
                 });
             </script>
             <!-- Floating External Link -->
-            <a href="https://24x7live.imvickykumar999.dpdns.org" target="_blank" class="floating-favicon"
-                title="Go to 24x7 Stream">
+            <a href="{% url 'index' %}" target="_blank" class="floating-favicon" title="Go to 24x7 Stream">
                 <img src="{% static 'assets/favicon.ico' %}" alt="24x7 Stream">
             </a>
         </div> <!-- End wrapper -->

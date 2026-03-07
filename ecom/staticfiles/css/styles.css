@@ -13391,3 +13391,14 @@ html {
   transform: translateY(-3px) scale(1.05);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
+
+/* Header Background Fade */
+.header-bg-fade {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../assets/bg.jpg") no-repeat center center !important;
+  background-size: cover !important;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}

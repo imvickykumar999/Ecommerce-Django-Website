@@ -1,0 +1,946 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Start 24x7 Live Stream on YouTube</title>
+    <meta name="title" content="Start 24/7 Live Stream on YouTube | Cloud Automation Dashboard">
+    <meta name="description"
+        content="Run a constant 24x7 YouTube Live Stream without keeping your PC on. Get a private cloud dashboard to upload videos, loop content, and grow your channel 24/7.">
+    <meta name="keywords"
+        content="24/7 live stream, YouTube automation, cloud live streaming, stream without PC, 24x7 YouTube channel, live stream dashboard, automated live stream, YouTube growth, stream loop videos">
+    <meta name="author" content="Vicky Kumar">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#f8fafc" id="theme-color-meta">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imvickykumar999.github.io/">
+    <meta property="og:title" content="Start 24/7 Live Stream on YouTube | Cloud Automation Dashboard">
+    <meta property="og:description"
+        content="Automate your YouTube channel with 24x7 live streaming. No PC required. Cloud-based dashboard for creators.">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/67197854">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://imvickykumar999.github.io/">
+    <meta property="twitter:title" content="Start 24/7 Live Stream on YouTube | Cloud Automation Dashboard">
+    <meta property="twitter:description"
+        content="Automate your YouTube channel with 24x7 live streaming. No PC required. Cloud-based dashboard for creators.">
+    <meta property="twitter:image" content="https://avatars.githubusercontent.com/u/67197854">
+
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/67197854">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0f172a',
+                        darkCard: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes pulse-red {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .animate-live {
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes floating-pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(99, 102, 241, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+            }
+        }
+
+        .blog-fab-pulse {
+            animation: floating-pulse 3s infinite;
+        }
+
+        .step-card:hover .step-number {
+            transform: scale(1.1) rotate(5deg);
+            background: #6366f1;
+            color: white;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        #sidebar-overlay {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #sidebar-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #side-nav {
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #side-nav.active {
+            transform: translateX(0);
+        }
+
+        .theme-toggle .fa-sun {
+            display: none;
+        }
+
+        .theme-toggle .fa-moon {
+            display: inline-block;
+        }
+
+        .dark .theme-toggle .fa-sun {
+            display: inline-block;
+        }
+
+        .dark .theme-toggle .fa-moon {
+            display: none;
+        }
+
+        .audio-toggle .fa-volume-mute {
+            display: inline-block;
+        }
+
+        .audio-toggle .fa-volume-up {
+            display: none;
+        }
+
+        .audio-toggle.playing .fa-volume-mute {
+            display: none;
+        }
+
+        .audio-toggle.playing .fa-volume-up {
+            display: inline-block;
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 text-slate-900 dark:bg-[#0f172a] dark:text-slate-200 selection:bg-indigo-500/30 transition-colors duration-300">
+
+    <!-- Dashboard Redirect Modal -->
+    <div id="dashboard-modal"
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500">
+        <div class="relative bg-white dark:bg-slate-900 p-1 rounded-[2.5rem] max-w-md w-full mx-4 shadow-[0_20px_50px_rgba(8,_112,_184,_0.1)] transform translate-y-8 transition-all duration-500"
+            id="dashboard-modal-content">
+            <!-- Gradient Border Effect -->
+            <div
+                class="absolute -inset-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 rounded-[2.5rem] blur-[2px] opacity-30">
+            </div>
+
+            <div class="relative bg-white dark:bg-slate-900 p-8 md:p-10 rounded-[2.4rem] overflow-hidden">
+                <div class="flex justify-between items-center mb-8">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-600/20">
+                            <i class="fas fa-rocket text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Welcome Back</h3>
+                    </div>
+                    <button id="close-modal"
+                        class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
+                </div>
+
+                <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                    Ready to manage your stream? Enter your <span
+                        class="font-bold text-indigo-600 dark:text-indigo-400">username</span> to access your personal
+                    dashboard.
+                </p>
+
+                <form id="dashboard-form" class="space-y-6">
+                    <div class="relative group">
+                        <div
+                            class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-2xl blur opacity-20 group-focus-within:opacity-50 transition duration-300">
+                        </div>
+                        <input type="text" id="dashboard-username" placeholder="e.g. 24x7" required
+                            class="relative w-full px-6 py-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none transition-all placeholder:text-slate-400">
+                    </div>
+
+                    <button type="submit"
+                        class="group relative w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl transition-all shadow-xl shadow-indigo-600/20 overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-800 transition-all group-hover:scale-105">
+                        </div>
+                        <span class="relative flex items-center justify-center gap-2">
+                            Enter Dashboard <i
+                                class="fas fa-chevron-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </button>
+                </form>
+
+                <p class="mt-6 text-center text-xs text-slate-400 dark:text-slate-500">
+                    Your unique <span id="preview-url" class="font-mono text-indigo-500/70">Dashboard URL</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Blog Icon -->
+    <div class="fixed bottom-6 right-6 z-[100] group">
+        <!-- Tooltip -->
+        <div
+            class="absolute bottom-full right-0 mb-3 px-3 py-1 bg-transparent text-white text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+            Read 24x7 Stream Blog
+            <div class="absolute top-full right-4 border-4 border-transparent border-t-transparent"></div>
+        </div>
+        <!-- FAB Button -->
+        <a href="https://blogforge.imvickykumar999.dpdns.org/?slug=stream-24x7-on-youtube-without-keeping-your-pc-on"
+            target="_blank"
+            class="blog-fab-pulse w-14 h-14 bg-transparent hover:bg-transparent text-white rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-90 border-2 border-white/20 overflow-hidden">
+            <img src="{% static 'assets/favicon.ico' %}" alt="Blog Avatar" class="w-full h-full object-cover">
+        </a>
+    </div>
+
+    <!-- Background Audio Player -->
+    <audio id="background-audio" loop preload="auto">
+        <source src="{% static 'assets/audio.m4a' %}" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="sidebar-open"
+                    class="md:hidden p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-7 bg-red-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-play text-white text-xs"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">24x7<span
+                            class="text-indigo-600 dark:text-indigo-400">Stream</span></span>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#how-it-works" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">How
+                    it Works</a>
+                <a href="#reviews"
+                    class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Reviews</a>
+                <a href="#faq" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">FAQ</a>
+
+                <button id="theme-toggle"
+                    class="theme-toggle p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 transition-all hover:scale-110 active:scale-95">
+                    <i class="fas fa-sun text-lg"></i>
+                    <i class="fas fa-moon text-lg"></i>
+                </button>
+
+                <!-- Audio Toggle Desktop -->
+                <button id="audio-toggle"
+                    class="audio-toggle p-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-indigo-400 transition-all hover:scale-110 active:scale-95">
+                    <i class="fas fa-volume-mute text-lg"></i>
+                    <i class="fas fa-volume-up text-lg"></i>
+                </button>
+
+                <a target="_blank"
+                    href="https://wa.me/918239957923?text=Hi%20Vicky,%20I%20want%20to%20start%20my%2024x7%20stream%20on%20my%20YouTube%20Channel."
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-full transition-all shadow-md">Start
+                    <i class="fas fa-arrow-right text-sm"></i></a>
+            </div>
+
+            <div class="flex md:hidden items-center gap-2">
+                <button id="theme-toggle-mobile"
+                    class="theme-toggle p-2 rounded-xl text-slate-600 dark:text-yellow-400">
+                    <i class="fas fa-sun text-lg"></i>
+                    <i class="fas fa-moon text-lg"></i>
+                </button>
+                <!-- Audio Toggle Mobile -->
+                <button id="audio-toggle-mobile"
+                    class="audio-toggle p-2.5 rounded-xl text-slate-600 dark:text-indigo-400">
+                    <i class="fas fa-volume-mute text-lg"></i>
+                    <i class="fas fa-volume-up text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Side Navigation (Mobile) -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] md:hidden"></div>
+    <aside id="side-nav"
+        class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 z-[70] md:hidden flex flex-col p-6">
+        <div class="flex items-center justify-between mb-10">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-6 bg-red-500 rounded-md flex items-center justify-center">
+                    <i class="fas fa-play text-white text-[10px]"></i>
+                </div>
+                <span class="text-lg font-bold text-slate-900 dark:text-white">24x7Stream</span>
+            </div>
+            <button id="sidebar-close"
+                class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+
+        <nav class="flex flex-col gap-2">
+            <a href="#how-it-works"
+                class="nav-link flex items-center gap-3 p-3 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-medium text-slate-600 dark:text-slate-300">
+                <i class="fas fa-cogs w-5"></i> How it Works
+            </a>
+            <a href="#reviews"
+                class="nav-link flex items-center gap-3 p-3 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-medium text-slate-600 dark:text-slate-300">
+                <i class="fas fa-star w-5"></i> Reviews
+            </a>
+            <a href="#faq"
+                class="nav-link flex items-center gap-3 p-3 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-medium text-slate-600 dark:text-slate-300">
+                <i class="fas fa-question-circle w-5"></i> FAQ
+            </a>
+        </nav>
+
+        <div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800">
+            <a target="_blank" href="https://wa.me/918239957923"
+                class="w-full bg-indigo-600 text-white p-4 rounded-2xl flex items-center justify-center gap-2 font-bold shadow-lg shadow-indigo-600/20 active:scale-95 transition-all">
+                Start My Stream <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent -z-10">
+        </div>
+
+        <div class="max-w-5xl mx-auto text-center">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-widest mb-8">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                Cloud Dashboard: Active
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
+                Your 24x7 Live Stream. <br><span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-400 dark:to-cyan-400">Zero
+                    Technical Effort.</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Run a constant YouTube Live Stream without keeping your PC on. Get a private dashboard, upload your
+                videos, and grow while you sleep.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a target="_blank"
+                    href="https://wa.me/918239957923?text=Hi%20Vicky,%20I%20want%20to%20start%20my%2024x7%20stream%20on%20my%20YouTube%20Channel."
+                    class="group flex items-center justify-center gap-3 bg-indigo-600 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-indigo-700 dark:hover:bg-indigo-50 transition-all shadow-xl">
+                    <i class="fab fa-whatsapp text-white dark:text-green-600 text-2xl"></i>
+                    Get My Dashboard Login
+                </a>
+            </div>
+
+            <div class="mt-20 relative group max-w-5xl mx-auto">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000">
+                </div>
+                <div
+                    class="relative bg-white dark:bg-[#1a2234] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xl h-[250px] sm:h-[360px] md:h-[480px]">
+                    <iframe class="w-full h-full"
+                        src="https://www.youtube.com/embed/videoseries?list=PLyeWzbpbicN0zV-I6w3tpivBUIynqTK44"
+                        title="24x7 Live Stream Automation" loading="lazy" frameborder="0"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="mt-4 text-slate-500 text-sm italic">Stream keeps running even if you close your browser or
+                    turn off your computer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12">Start Streaming in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="step-card bg-white dark:bg-slate-800/30 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 group transition-all hover:shadow-xl dark:hover:bg-slate-800/50">
+                    <div
+                        class="step-number w-12 h-12 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center font-bold text-2xl mb-6 transition-all mx-auto">
+                        1</div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Get Your Login</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Receive your private dashboard username and password
+                        instantly via WhatsApp.</p>
+                </div>
+                <div
+                    class="step-card bg-white dark:bg-slate-800/30 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 group transition-all hover:shadow-xl dark:hover:bg-slate-800/50">
+                    <div
+                        class="step-number w-12 h-12 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center font-bold text-2xl mb-6 transition-all mx-auto">
+                        2</div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Upload Videos</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Simply click and select your video files on your
+                        dashboard. No technical skills needed.</p>
+                </div>
+                <div
+                    class="step-card bg-white dark:bg-slate-800/30 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 group transition-all hover:shadow-xl dark:hover:bg-slate-800/50">
+                    <div
+                        class="step-number w-12 h-12 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center font-bold text-2xl mb-6 transition-all mx-auto">
+                        3</div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Go Live 24x7</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Click "Start Stream" and connect to YouTube. Our cloud
+                        handles the rest while you're offline.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Reviews Section -->
+    <section id="reviews"
+        class="py-24 px-6 bg-white dark:bg-[#0f172a] transition-colors duration-300 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">Trusted by Creators</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-lg">Join 100+ YouTubers who are growing their channels
+                    effortlessly.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+
+                <!-- Review 1: STG Prime -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=STG+Prime&background=6366f1&color=fff&bold=true"
+                            alt="STG Prime" class="w-14 h-14 rounded-full border-2 border-indigo-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">STG Prime</h4>
+                            <p class="text-indigo-600 dark:text-indigo-400 text-xs font-semibold">Gaming Creator</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"The stream
+                        stability is exceptional. I never experienced any lag. The dashboard is super easy to navigate,
+                        and the service is completely reliable. 10/10!"</p>
+                </div>
+
+                <!-- Review 2: Emerald Green Theme -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Alex+Tech&background=10b981&color=fff&bold=true"
+                            alt="Alex Tech" class="w-14 h-14 rounded-full border-2 border-emerald-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Alex Tech</h4>
+                            <p class="text-emerald-600 dark:text-emerald-400 text-xs font-semibold">Tutorial Channel</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"I was
+                        skeptical about cloud streaming, but this dashboard changed everything. My tutorials now run
+                        24/7 without me lifting a finger."</p>
+                </div>
+
+                <!-- Review 3: Amber/Orange Theme -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Lofi+Girl&background=f59e0b&color=000&bold=true"
+                            alt="Lofi Beats" class="w-14 h-14 rounded-full border-2 border-amber-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Lofi Beats</h4>
+                            <p class="text-amber-600 dark:text-amber-400 text-xs font-semibold">Music Streamer</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"Running a
+                        24/7 radio station used to kill my laptop. Now it's all in the cloud. Vicky's support team is
+                        also very responsive!"</p>
+                </div>
+
+                <!-- Review 4: Rose/Pink Theme -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Sarah+Vlogs&background=f43f5e&color=fff&bold=true"
+                            alt="Sarah" class="w-14 h-14 rounded-full border-2 border-rose-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Sarah Vlogs</h4>
+                            <p class="text-rose-600 dark:text-rose-400 text-xs font-semibold">Lifestyle Influencer</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"Getting my
+                        own subdomain was a huge plus! It feels so professional to manage my stream from my own private
+                        link."</p>
+                </div>
+
+                <!-- Review 5: Sky Blue Theme -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Dev+Master&background=0ea5e9&color=fff&bold=true"
+                            alt="Dev" class="w-14 h-14 rounded-full border-2 border-sky-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Dev Master</h4>
+                            <p class="text-sky-600 dark:text-sky-400 text-xs font-semibold">Coding Streamer</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"The
+                        automation logic is solid. I just push my videos to the cloud and the loop handles the rest
+                        perfectly. No downtime at all."</p>
+                </div>
+
+                <!-- Review 6: Violet/Purple Theme -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=News+24&background=8b5cf6&color=fff&bold=true"
+                            alt="News" class="w-14 h-14 rounded-full border-2 border-violet-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">News 24/7</h4>
+                            <p class="text-violet-600 dark:text-violet-400 text-xs font-semibold">Broadcast Channel</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"Reliability
+                        is our #1 priority for our news loop. This service hasn't failed us once in 6 months of
+                        continuous streaming."</p>
+                </div>
+
+                <!-- Review 7: Teal Theme -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Zen+Mind&background=14b8a6&color=fff&bold=true"
+                            alt="Zen" class="w-14 h-14 rounded-full border-2 border-teal-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Zen Mind</h4>
+                            <p class="text-teal-600 dark:text-teal-400 text-xs font-semibold">Meditation Channel</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"Setup was
+                        incredibly fast. I was live within 45 minutes of contacting Vicky on WhatsApp. Smooth and
+                        peaceful experience."</p>
+                </div>
+
+                <!-- Review 8: Slate Theme -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Raja+Comedy&background=475569&color=fff&bold=true"
+                            alt="Raja" class="w-14 h-14 rounded-full border-2 border-slate-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Comedy Raja</h4>
+                            <p class="text-slate-600 dark:text-slate-400 text-xs font-semibold">Entertainment</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"Best
+                        decision for my channel growth! My watch time has increased by 400% since starting the 24/7
+                        stream loop."</p>
+                </div>
+
+                <!-- Review 9: Lime Theme -->
+                <div
+                    class="review-card bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://ui-avatars.com/api/?name=Finance+Pro&background=84cc16&color=000&bold=true"
+                            alt="Finance" class="w-14 h-14 rounded-full border-2 border-lime-500/30">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Finance Pro</h4>
+                            <p class="text-lime-600 dark:text-lime-400 text-xs font-semibold">Stock Market Guru</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-4 text-yellow-500 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 italic flex-grow text-sm leading-relaxed">"Value for
+                        money. At ₹599, it's cheaper than running a high-end PC all month. The ROI on subscribers is
+                        worth every penny."</p>
+                </div>
+
+            </div>
+
+            <!-- Feedback Submission Call-to-Action -->
+            <div
+                class="max-w-2xl mx-auto bg-slate-50 dark:bg-slate-900/40 border border-dashed border-slate-300 dark:border-slate-700 p-10 rounded-[2.5rem] text-center">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Are you a customer?</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-8">Your feedback helps us improve the streaming
+                    experience for everyone.</p>
+
+                <a target="_blank" href="https://play.google.com/store/apps/details?id=com.imvickykumar999.x24live"
+                    class="inline-flex items-center gap-3 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30 px-8 py-4 rounded-2xl font-bold transition-all group">
+                    <i class="fas fa-comment-alt group-hover:scale-110 transition-transform"></i>
+                    Submit Your Feedback
+                </a>
+
+                <p class="mt-6 text-slate-500 text-xs italic">
+                    <i class="fas fa-info-circle mr-1"></i> Your review will be visible on this website once approved.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 px-6 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-400 dark:to-cyan-400">
+                    Frequently Asked Questions</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-lg">Got questions? We've got answers.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div
+                    class="faq-item group bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden transition-all hover:border-indigo-500/30">
+                    <button class="faq-toggle w-full px-8 py-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-slate-900 dark:text-white md:text-lg">How can I run multiple streams
+                            in parallel on the same channel?</span>
+                        <i class="fas fa-chevron-down faq-icon text-indigo-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-8">
+                        <div class="pb-6 text-slate-600 dark:text-slate-400 space-y-3">
+                            <p>To run multiple parallel streams, don't use the standard <strong>Stream</strong> tab.
+                                Instead:</p>
+                            <ol class="list-decimal pl-5 space-y-2">
+                                <li>Go to the <strong>Manage</strong> tab in YouTube Studio.</li>
+                                <li>Click <strong>Schedule Stream</strong>.</li>
+                                <li>Select or create new settings for each broadcast.</li>
+                                <li>This generates a <strong>unique streaming key</strong> for each individual stream,
+                                    allowing them to run at the same time.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="faq-item group bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden transition-all hover:border-indigo-500/30">
+                    <button class="faq-toggle w-full px-8 py-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-slate-900 dark:text-white md:text-lg">Do I need to keep my computer
+                            or phone turned on?</span>
+                        <i class="fas fa-chevron-down faq-icon text-indigo-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-8">
+                        <p class="pb-6 text-slate-600 dark:text-slate-400">No. Your stream runs on our high-performance
+                            cloud servers. Once you click "Start Stream" on your dashboard, you can turn off your
+                            device—the stream stays live 24/7.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="faq-item group bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden transition-all hover:border-indigo-500/30">
+                    <button class="faq-toggle w-full px-8 py-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-slate-900 dark:text-white md:text-lg">Is this safe for my YouTube
+                            channel?</span>
+                        <i class="fas fa-chevron-down faq-icon text-indigo-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-8">
+                        <p class="pb-6 text-slate-600 dark:text-slate-400">Yes, it is 100% safe. We use your "Stream
+                            Key" to send data to YouTube. We don't need your YouTube password, and our system follows
+                            YouTube's official guidelines.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="faq-item group bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden transition-all hover:border-indigo-500/30">
+                    <button class="faq-toggle w-full px-8 py-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-slate-900 dark:text-white md:text-lg">Can I change the videos or
+                            loop different content?</span>
+                        <i class="fas fa-chevron-down faq-icon text-indigo-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-8">
+                        <p class="pb-6 text-slate-600 dark:text-slate-400">Yes! Your dashboard allows you to upload,
+                            delete, and manage your video files anytime. You can stop the stream, swap videos, and
+                            restart it in just a few clicks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <p class="text-slate-500 mb-6">Still have questions?</p>
+                <a target="_blank" href="https://wa.me/918239957923"
+                    class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
+                    Chat with us on WhatsApp <i class="fas fa-external-link-alt text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-slate-200 dark:border-slate-900 text-center transition-colors">
+        <div class="flex justify-center gap-6 mb-8 text-slate-400 dark:text-slate-500 text-xl">
+            <a target="_blank" href="https://www.youtube.com/@imvickykumar999"
+                class="hover:text-indigo-600 dark:hover:text-white transition-colors"><i class="fab fa-youtube"></i></a>
+            <a target="_blank" href="https://x.com/imvickykumar999/"
+                class="hover:text-indigo-600 dark:hover:white transition-colors"><i class="fab fa-twitter"></i></a>
+            <a target="_blank" href="https://www.instagram.com/imvickykumar999/"
+                class="hover:text-indigo-600 dark:hover:white transition-colors"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="text-slate-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">
+            Built for creators by developer
+        </p>
+        <p class="text-slate-600 dark:text-slate-500 text-sm font-medium">
+            © <span id="year"></span> 24x7 Stream by <a href="https://github.com/imvickykumar999" target="_blank"
+                class="text-indigo-600 dark:text-indigo-400 hover:underline">@imvickykumar999</a>
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+        const htmlElement = document.documentElement;
+
+        const themeColorMeta = document.getElementById('theme-color-meta');
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'light') {
+            htmlElement.classList.remove('dark');
+            if (themeColorMeta) themeColorMeta.setAttribute('content', '#f8fafc');
+        } else {
+            htmlElement.classList.add('dark');
+            if (themeColorMeta) themeColorMeta.setAttribute('content', '#0f172a');
+        }
+
+        const toggleTheme = () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                if (themeColorMeta) themeColorMeta.setAttribute('content', '#f8fafc');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                if (themeColorMeta) themeColorMeta.setAttribute('content', '#0f172a');
+            }
+        };
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleBtnMobile.addEventListener('click', toggleTheme);
+
+        // Audio toggle functionality
+        const audioElement = document.getElementById('background-audio');
+        const audioToggleBtn = document.getElementById('audio-toggle');
+        const audioToggleBtnMobile = document.getElementById('audio-toggle-mobile');
+
+        // Check if audio was playing before (from localStorage)
+        const wasAudioPlaying = localStorage.getItem('audioPlaying') !== 'false';
+
+        const toggleAudio = () => {
+            if (audioElement.paused) {
+                audioElement.play().catch(error => {
+                    console.log('Autoplay prevented:', error);
+                });
+                audioToggleBtn.classList.add('playing');
+                audioToggleBtnMobile.classList.add('playing');
+                localStorage.setItem('audioPlaying', 'true');
+            } else {
+                audioElement.pause();
+                audioToggleBtn.classList.remove('playing');
+                audioToggleBtnMobile.classList.remove('playing');
+                localStorage.setItem('audioPlaying', 'false');
+            }
+        };
+
+        audioToggleBtn.addEventListener('click', toggleAudio);
+        audioToggleBtnMobile.addEventListener('click', toggleAudio);
+
+        // Play background audio on page load/refresh
+        window.addEventListener('load', () => {
+            audioElement.volume = 0.5; // Set volume to 50%
+
+            if (wasAudioPlaying) {
+                audioElement.play().catch(error => {
+                    console.log('Autoplay prevented:', error);
+                });
+                audioToggleBtn.classList.add('playing');
+                audioToggleBtnMobile.classList.add('playing');
+            }
+        });
+
+        // Update button state when audio plays/pauses
+        audioElement.addEventListener('play', () => {
+            audioToggleBtn.classList.add('playing');
+            audioToggleBtnMobile.classList.add('playing');
+        });
+        audioElement.addEventListener('pause', () => {
+            audioToggleBtn.classList.remove('playing');
+            audioToggleBtnMobile.classList.remove('playing');
+        });
+
+        const sidebarOpen = document.getElementById('sidebar-open');
+        const sidebarClose = document.getElementById('sidebar-close');
+        const sidebarNav = document.getElementById('side-nav');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const openSidebar = () => {
+            sidebarNav.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeSidebar = () => {
+            sidebarNav.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        sidebarOpen.addEventListener('click', openSidebar);
+        sidebarClose.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+        navLinks.forEach(link => link.addEventListener('click', closeSidebar));
+
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) item.classList.remove('active');
+                });
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Modal functionality
+        const dashboardModal = document.getElementById('dashboard-modal');
+        const dashboardModalContent = document.getElementById('dashboard-modal-content');
+        const closeModalBtn = document.getElementById('close-modal');
+        const dashboardForm = document.getElementById('dashboard-form');
+        const dashboardUsername = document.getElementById('dashboard-username');
+        const previewUrl = document.getElementById('preview-url');
+
+        // Update preview URL as user types
+        dashboardUsername.addEventListener('input', (e) => {
+            const val = e.target.value.trim().toLowerCase() || 'dashboard';
+            previewUrl.textContent = `${val}.imvickykumar999.dpdns.org`;
+        });
+
+        // Show modal on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                dashboardModal.classList.remove('opacity-0', 'pointer-events-none');
+                dashboardModalContent.classList.remove('translate-y-8');
+                dashboardUsername.focus();
+            }, 800);
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', () => {
+            dashboardModal.classList.add('opacity-0', 'pointer-events-none');
+            dashboardModalContent.classList.add('translate-y-8');
+        });
+
+        // Handle form submission
+        dashboardForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = dashboardUsername.value.trim().toLowerCase();
+            if (username) {
+                window.location.href = `https://${username}.imvickykumar999.dpdns.org/`;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
