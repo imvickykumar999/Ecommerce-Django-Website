@@ -36,8 +36,8 @@
 
                         <p class="card-text">
                             <strong>Sub Total: </strong>
-                            ${{ product.price_or_sale }} x {{ product.qty }} = <strong style="color: green;">
-                                ${{ product.subtotal }}</strong>
+                            ₹{{ product.price_or_sale }} x {{ product.qty }} = <strong style="color: green;">
+                                ₹{{ product.subtotal }}</strong>
                         </p>
 
                         <div class="quantity-selector">
@@ -67,7 +67,7 @@
         <br />
         <div class="cart-total-card card mb-3" style="max-width: 80%;">
             <div class="card-body">
-                <h4 class="card-title">Total: &nbsp; <span id="cart-total">${{ totals }}</span>
+                <h4 class="card-title">Total: &nbsp; <span id="cart-total">₹{{ totals }}</span>
                 </h4>
             </div>
         </div>
