@@ -6,6 +6,13 @@
     #add-cart {
         transition: all 0.3s ease;
     }
+    .product-image-container img {
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+    .product-image-container img:hover {
+        opacity: 0.8;
+    }
 </style>
 
 <!-- Header-->
@@ -115,7 +122,30 @@
     </div>
 </section>
 
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content bg-transparent border-0">
+      <div class="modal-header border-0 pb-0 justify-content-end" style="position: absolute; right: 15px; top: 15px; z-index: 1055;">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white; opacity: 1; padding: 10px; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5);"></button>
+      </div>
+      <div class="modal-body text-center p-0">
+        <img src="" id="modalImage" class="img-fluid rounded" style="max-height: 90vh; object-fit: contain;" alt="Product Image">
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+    $(document).ready(function() {
+        $('.product-image-container img').on('click', function() {
+            var src = $(this).attr('src');
+            $('#modalImage').attr('src', src);
+            var myModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            myModal.show();
+        });
+    });
+
     $(document).on('click', '#add-cart', function (e) {
         e.preventDefault();
 
